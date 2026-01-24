@@ -11,10 +11,10 @@ def extract():
 
         data = response.json() #returns the data as json
         df = pd.DataFrame(data)
-        print(df) # prints data in the form of a dataFrame .
+        return df # returns data in the form of a dataFrame .
 
     except requests.exceptions.RequestException as e:
         print(f"An error occurred : {e}")
 
 if __name__ == "__main__":
-    extract()
+    print(extract().head())
