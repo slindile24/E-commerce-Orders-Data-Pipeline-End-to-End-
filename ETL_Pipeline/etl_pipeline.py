@@ -11,10 +11,34 @@ def extract():
 
         data = response.json() #returns the data as json
         df = pd.DataFrame(data)
-        return df # returns data in the form of a dataFrame .
+        return(df)# returns data in the form of a dataFrame .
 
     except requests.exceptions.RequestException as e:
         print(f"An error occurred : {e}")
 
+raw_df = extract()
+
+def transform(df):
+    """Took a snippet of how the json response looks so that I can highlight what to clean and validate:
+    {'id': 1, 'title': 'Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops',
+      'price': 109.95,
+    'description': 'Your perfect pack for everyday use and walks in the forest.
+    Stash your laptop (up to 15 inches) in the padded sleeve, your everyday', 
+    'category': "men's clothing", 
+    'image': 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png', 
+    'rating': {'rate': 3.9, 'count': 120} }
+    """
+    # print(df["rating"].iloc[0])
+    df["rate"] = df["rating"].apply(lambda x: x['rate'])
+    df["count"] = df["rating"].apply(lambda x: x['count'])
+    # created two new columns rate and count to drop the neted loop
+
+    df = df.drop(columns=["rating"])
+
+    
+    
+    
+
 if __name__ == "__main__":
-    print(extract().head())
+    # print(extract())
+    (transform(raw_df))

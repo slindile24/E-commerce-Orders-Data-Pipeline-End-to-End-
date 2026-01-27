@@ -1,0 +1,7 @@
+#!/home/slindilenkabinde/Github_Projects/E-commerce-Orders-Data-Pipeline-End-to-End-/.venv/bin/python
+import sys
+from charset_normalizer.cli import cli_detect
+if __name__ == '__main__':
+    if sys.argv[0].endswith('.exe'):
+        sys.argv[0] = sys.argv[0][:-4]
+    sys.exit(cli_detect())
