@@ -35,11 +35,23 @@ def transform(df):
     df = df.drop(columns=["rating"])
     df["rate"] = df["rate"].astype(float)
     df["count"] = df["count"].astype(int)
-    print(df)
+    df["id"] = df["id"].astype(int)
+    df['price'] = df['price'].astype(float)
+    df["title"] = df["title"].astype(str)
+    
+    df = df[df["id"] > 0]
+    df = df[df["price"] > 0]
+    df = df[df["count"] >= 0]
+    df = df[(df["rate"] >= 0)]
+    df = df[df["title"].notna()]
+
+    return df
+
+    
  
 
 
 
 if __name__ == "__main__":
     # print(extract())
-    (transform(raw_df))
+    print(transform(raw_df).head())
