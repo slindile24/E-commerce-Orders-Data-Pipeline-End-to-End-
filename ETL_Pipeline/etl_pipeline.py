@@ -31,13 +31,14 @@ def transform(df):
     # print(df["rating"].iloc[0])
     df["rate"] = df["rating"].apply(lambda x: x['rate'])
     df["count"] = df["rating"].apply(lambda x: x['count'])
-    # created two new columns rate and count to drop the neted loop
-
+    # created two new columns rate and count to drop the nested dict column
     df = df.drop(columns=["rating"])
+    df["rate"] = df["rate"].astype(float)
+    df["count"] = df["count"].astype(int)
+    print(df)
+ 
 
-    
-    
-    
+
 
 if __name__ == "__main__":
     # print(extract())
