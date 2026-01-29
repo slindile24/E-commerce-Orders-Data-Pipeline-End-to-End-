@@ -1,5 +1,13 @@
 import requests
 import pandas as pd
+from dotenv import load_dotenv
+import os
+from sqlalchemy import create_engine
+from pathlib import Path
+
+load_dotenv(Path(__file__).resolve().parent / ".env")
+
+
 
 def extract(): 
 
@@ -47,6 +55,37 @@ def transform(df):
 
     return df
 
+transformed_df = transform(raw_df)
+
+def load(df):
+    user = os.getenv("DB_USER")
+    password = os.getenv("DB_PASSWORD")
+    host = os.getenv("DB_HOST")
+    port = os.getenv("DB_PORT")
+    db = os.getenv("DB_NAME")
+
+    # print("USER:", user)
+    # print("PASSWORD:", password)
+    # print("HOST:", host)
+    # print("PORT:", port)
+    # print("DB:", db)
+
+
+    DATABASE_URL = f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}"
+
+    engine = create_engine(DATABASE_URL)
+
+    df.to_sql(
+        name = "products",
+        con = engine,
+        if_exists = "replace",
+        index = False
+    )
+    print("Data loaded successfully into Postgres!")
+
+
+
+
     
  
 
@@ -54,4 +93,5 @@ def transform(df):
 
 if __name__ == "__main__":
     # print(extract())
-    print(transform(raw_df).head())
+    # print(transform(raw_df).head())
+    load(transformed_df)

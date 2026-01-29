@@ -16,4 +16,6 @@ __pycache__/
 .env
 
 # .json
-*.json
+credentials.json
+secrets.json
+service_account.json
