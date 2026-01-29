@@ -84,14 +84,24 @@ def load(df):
     print("Data loaded successfully into Postgres!")
 
 
+raw_df = extract()
+transformed_df = transform(raw_df)
+load(transformed_df)
 
-
+def run_pipeline():
+    raw_df = extract()
+    print("Data extracted")
     
- 
+    transformed_df = transform(raw_df)
+    print("Data transformed")
+
+    load(transformed_df)
+    print("Data loaded into Postgres")
 
 
 
 if __name__ == "__main__":
     # print(extract())
     # print(transform(raw_df).head())
-    load(transformed_df)
+    # load(transformed_df)
+    run_pipeline()
