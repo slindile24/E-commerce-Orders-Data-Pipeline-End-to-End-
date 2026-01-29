@@ -24,3 +24,17 @@ Invalid or inconsistent records are handled appropriately
 The transformed data is loaded into a PostgreSQL database.
 
 The database serves as the final storage layer for analytics and reporting.
+
+## Tech Stack
+- Python  
+- Pandas  
+- Requests  
+- PostgreSQL  
+- SQLAlchemy  
+- psycopg2  
+- python-dotenv  
+
+## How to Run the Project
+1. Just hit that run button on vscode as I made it easier to just run the whole pipeline at once .
+
+The end output will be : "Data is loaded successfully into Postgres"
